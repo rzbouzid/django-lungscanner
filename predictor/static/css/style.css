@@ -1,0 +1,83 @@
+/* =========================
+   Base layout and colors
+   ========================= */
+body {
+  font-family: system-ui, sans-serif;
+  background-color: #f7f9fb;
+  margin: 0;
+  padding: 0;
+}
+
+/* Center main container */
+.container {
+  max-width: 700px;
+  margin: 50px auto;
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Title */
+h1 {
+  text-align: center;
+  color: #222;
+}
+
+/* Upload form */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+input[type="file"] {
+  border: 1px solid #ccc;
+  padding: 0.6rem;
+  border-radius: 8px;
+  width: 100%;
+}
+
+button {
+  background: #4caf50;
+  color: white;
+  border: none;
+  padding: 0.8rem 1.4rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+button:hover {
+  background: #43a047;
+}
+
+/* Results box */
+.results {
+  margin-top: 2rem;
+  background: #e9f7ef;
+  border: 1px solid #a5d6a7;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.disease-row {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #e0e0e0;
+  padding: 0.4rem 0;
+}
+
+.disease-row:last-child {
+  border-bottom: none;
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+  color: #888;
+  margin-top: 2rem;
+  font-size: 0.85rem;
+}
