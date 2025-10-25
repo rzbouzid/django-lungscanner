@@ -1,0 +1,121 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lung X-Ray Disease Predictor</title>
+
+    <!-- Optional external CSS -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <style>
+        /* quick built-in styling so it looks good out of the box */
+        body {
+            font-family: system-ui, sans-serif;
+            background-color: #f6f8fa;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        input[type=file] {
+            border: 1px solid #ccc;
+            padding: 0.5rem;
+            border-radius: 6px;
+            width: 100%;
+        }
+        button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            padding: 0.7rem 1.2rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s ease;
+        }
+        button:hover {
+            background: #45A049;
+        }
+        .results {
+            margin-top: 2rem;
+            background: #f2fff2;
+            border: 1px solid #c8e6c9;
+            padding: 1rem;
+            border-radius: 8px;
+        }
+        .results h2 {
+            margin-top: 0;
+        }
+        .disease-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.3rem 0;
+            border-bottom: 1px solid #eee;
+        }
+        .disease-row:last-child {
+            border-bottom: none;
+        }
+        .footer {
+            text-align: center;
+            font-size: 0.85rem;
+            color: #888;
+            margin-top: 2rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Lung X-Ray Disease Predictor</h1>
+        <p style="text-align:center;color:#555;">
+            Upload a chest X-ray image to generate mock predictions.<br>
+            (Real AI integration will come from SageMaker later.)
+        </p>
+
+        <!-- Upload form -->
+        <form action="{% url 'predict' %}" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="file" name="xray" accept="image/*" required>
+            <button type="submit">Analyze X-Ray</button>
+        </form>
+
+        <!-- Prediction results -->
+        {% if prediction %}
+        <div class="results">
+            <h2>Predicted Probabilities</h2>
+            {% for disease, prob in prediction.items %}
+            <div class="disease-row">
+                <span>{{ disease }}</span>
+                <span>{{ prob|floatformat:2 }}</span>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <div class="footer">
+            <p>Hackathon Demo — Built with Django & AWS SageMaker</p>
+        </div>
+    </div>
+
+    <!-- optional JS -->
+    <script src="{% static 'js/script.js' %}" defer></script>
+</body>
+</html>
